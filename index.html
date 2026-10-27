@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tek Zanith | Senior QA Automation Engineer & AI Test Architect</title>
+  <meta name="description" content="Portfolio and interactive CV of Tek Zanith — Senior Quality Assurance Engineer & AI Test Architect specializing in Playwright, Maestro, Multi-Agent AI Swarms, and Enterprise Scalability.">
+  <meta name="author" content="Tek Zanith">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #070b14;
+      --bg-card: #0f172a;
+      --bg-card-hover: #1e293b;
+      --surface: #131c31;
+      --border: #1e293b;
+      --border-focus: #3b82f6;
+      --primary: #38bdf8;
+      --primary-glow: rgba(56, 189, 248, 0.18);
+      --accent: #60a5fa;
+      --neon-emerald: #10b981;
+      --neon-emerald-glow: rgba(16, 185, 129, 0.15);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-main: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      letter-spacing: 0.025em;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 3D Background Canvas */
+    #three-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.55;
+    }
+
+    /* Layout Wrapper */
+    .app-wrap {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* HEADER & NAVIGATION */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: rgba(7, 11, 20, 0.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .brand-logo {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo .dot {
+      width: 9px;
+      height: 9px;
+      background: var(--neon-emerald);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--neon-emerald);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #031326;
+      border: 1px solid var(--primary);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: #7dd3fc;
+      transform: translateY(-2px);
+      box-shadow: 0 0 28px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--text-muted);
+      transform: translateY(-2px);
+    }
+
+    /* CONTAINER & GRID */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* HERO SECTION */
+    #hero {
+      padding: 90px 0 60px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--neon-emerald-glow);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 100px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--neon-emerald);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .status-badge .ping {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--neon-emerald);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 4.4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      color: #ffffff;
+    }
+
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+
+    .hero-bio {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 820px;
+      letter-spacing: 0.02em;
+      margin-bottom: 36px;
+    }
+
+    .hero-bio strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 50px;
+    }
+
+    /* STATS STRIP */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      width: 100%;
+      padding: 24px 32px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
+      margin-top: 10px;
+      margin-bottom: 70px;
+    }
+
+    .stat-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .stat-number span {
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-top: 4px;
+    }
+
+    /* SECTION HEADERS */
+    .section-wrap {
+      padding: 60px 0;
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-tag::before {
+      content: "";
+      width: 18px;
+      height: 2px;
+      background: var(--primary);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 1.02rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      letter-spacing: 0.02em;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    /* SKILLS CARDS GRID */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .skill-card:hover {
+      border-color: var(--border-focus);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .skill-icon {
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .skill-name {
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.03em;
+      margin-bottom: 12px;
+    }
+
+    .skill-body {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      letter-spacing: 0.02em;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    .tech-pill-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-pill {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      color: #cbd5e1;
+      letter-spacing: 0.04em;
+    }
+
+    /* 3D INTERACTIVE TIMELINE STAGE */
+    .stage-3d-wrap {
+      background: radial-gradient(circle at center, #101a33 0%, #080d19 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    #career-3d-canvas {
+      width: 100%;
+      height: 380px;
+      display: block;
+      cursor: grab;
+    }
+
+    #career-3d-canvas:active {
+      cursor: grabbing;
+    }
+
+    .stage-caption {
+      position: absolute;
+      bottom: 16px;
+      left: 20px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      pointer-events: none;
+      background: rgba(7, 11, 20, 0.6);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    /* EXPERIENCE TIMELINE CARDS */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      bottom: 10px;
+      left: 19px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary), var(--accent), rgba(255, 255, 255, 0.05));
+    }
+
+    .job-card {
+      position: relative;
+      padding-left: 56px;
+    }
+
+    .job-node {
+      position: absolute;
+      left: 10px;
+      top: 6px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--primary);
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+
+    .job-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    .job-content:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      background: var(--surface);
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .job-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+    }
+
+    .job-company {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 2px;
+    }
+
+    .job-date {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      padding: 4px 12px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .job-summary {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      letter-spacing: 0.02em;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .job-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .job-bullets li {
+      font-size: 0.96rem;
+      color: #cbd5e1;
+      line-height: 1.68;
+      letter-spacing: 0.02em;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .job-bullets li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      top: 0px;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .job-bullets li strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* EDUCATION & CREDENTIALS */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .edu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .edu-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .edu-inst {
+      font-size: 0.95rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .edu-loc {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+
+    /* AWARDS & LANGUAGES */
+    .dual-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 860px) {
+      .dual-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .award-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .award-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .award-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .award-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+
+    .award-info h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .award-info p {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* LANGUAGE CARDS */
+    .lang-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .lang-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .lang-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .lang-top span {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--primary);
+    }
+
+    .lang-progress {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .lang-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+    }
+
+    /* CONTACT FOOTER */
+    #contact {
+      background: linear-gradient(180deg, transparent 0%, #050811 100%);
+      border-top: 1px solid var(--border);
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .contact-container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .contact-title {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    .contact-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      margin-bottom: 36px;
+    }
+
+    .contact-methods {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .contact-card-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.94rem;
+      letter-spacing: 0.03em;
+      transition: all 0.25s ease;
+    }
+
+    .contact-card-link:hover {
+      border-color: var(--primary);
+      background: var(--surface);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      padding: 30px 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      letter-spacing: 0.06em;
+    }
+
+    /* RESPONSIVE BREAKPOINTS */
+    @media (max-width: 768px) {
+      nav {
+        padding: 16px 20px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .container {
+        padding: 0 20px;
+      }
+      #hero {
+        padding: 60px 0 40px 0;
+      }
+      .stats-strip {
+        grid-template-columns: 1fr 1fr;
+        padding: 20px;
+      }
+      .job-content {
+        padding: 22px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background 3D Particles WebGL Canvas -->
+  <canvas id="three-bg"></canvas>
+
+  <div class="app-wrap">
+
+    <!-- NAVIGATION -->
+    <nav>
+      <a href="#hero" class="brand-logo">
+        <span class="dot"></span>
+        <span>TEK ZANITH</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#awards">Honors</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="TekZanith_CV_Updated.pdf" target="_blank" class="btn btn-outline" download>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download CV (PDF)
+        </a>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+
+      <!-- HERO SECTION -->
+      <section id="hero">
+        <div class="status-badge">
+          <span class="ping"></span>
+          Available for Senior QA & AI Test Architecture Roles
+        </div>
+
+        <h1 class="hero-title">
+          Hi, I'm <span class="gradient-text">Tek Zanith</span>.
+        </h1>
+
+        <div class="hero-subtitle">
+          Senior QA Automation Engineer | AI & Test Architecture Lead
+        </div>
+
+        <p class="hero-bio">
+          Impact-driven Quality Assurance Engineer and Test Architect with <strong>4+ years of experience</strong> leading test strategy across distributed web, mobile native, and enterprise platforms. I replace fragile manual cycles with <strong>autonomous multi-agent test swarms</strong>, <strong>Maestro mobile automation fleets</strong>, and <strong>zero-leak Row Level Security (RLS) enforcement</strong> across high-concurrency systems.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">
+            Get in Touch
+          </a>
+          <a href="#experience" class="btn btn-outline">
+            View Experience Timeline
+          </a>
+        </div>
+
+        <!-- RECRUITER / HR STATS HIGHLIGHT STRIP -->
+        <div class="stats-strip">
+          <div class="stat-box">
+            <div class="stat-number">4+ <span>YRS</span></div>
+            <div class="stat-label">End-to-End QA Leadership</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">65% <span>CUT</span></div>
+            <div class="stat-label">Regression Cycle Reduction</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">100% <span>PASS</span></div>
+            <div class="stat-label">Automated Core Workflow Rate</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">6.5 <span>IELTS</span></div>
+            <div class="stat-label">Advanced English Fluency</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS SECTION -->
+      <section id="skills" class="section-wrap">
+        <div class="section-tag">// Core Competencies</div>
+        <h2 class="section-title">Technical Tooling & Architecture</h2>
+        <p class="section-desc">
+          Structured for maximum clarity and fast scanning. Every methodology and tool has been battle-tested across enterprise production environments.
+        </p>
+
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon">⚡</div>
+            <h3 class="skill-name">Test Automation & Engineering</h3>
+            <p class="skill-body">Architecting deterministic end-to-end automation, regression gates, and scalable test harnesses that run reliably in CI/CD without flaky assertions.</p>
+            <div class="tech-pill-wrap">
+              <span class="tech-pill">Playwright</span>
+              <span class="tech-pill">Maestro CLI</span>
+              <span class="tech-pill">Selenium (Python/C#)</span>
+              <span class="tech-pill">Postman API</span>
+              <span class="tech-pill">Bun Test</span>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">🤖</div>
+            <h3 class="skill-name">AI & Agentic Orchestration</h3>
+            <p class="skill-body">Pioneering multi-agent test swarms, model routing protocols (Opus, Sonnet, Codex), and AST-level root-cause debugging directly in application source code.</p>
+            <div class="tech-pill-wrap">
+              <span class="tech-pill">Multi-Agent Swarms</span>
+              <span class="tech-pill">Model Routing</span>
+              <span class="tech-pill">Prompt Engineering</span>
+              <span class="tech-pill">AST Bug Isolation</span>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">📱</div>
+            <h3 class="skill-name">Mobile & Multi-Platform QA</h3>
+            <p class="skill-body">Comprehensive certification across device fleets, handling dynamic viewports, foldable screens, and compact form factor constraints under native runtimes.</p>
+            <div class="tech-pill-wrap">
+              <span class="tech-pill">React Native</span>
+              <span class="tech-pill">Expo SDK</span>
+              <span class="tech-pill">Android API 36/37</span>
+              <span class="tech-pill">iOS Simulators</span>
+              <span class="tech-pill">Foldable Certification</span>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">🛡️</div>
+            <h3 class="skill-name">Backend, Security & Performance</h3>
+            <p class="skill-body">Validating data privacy at the database boundary, load-testing high-concurrency APIs, and asserting real-time WebSockets and webhook delivery.</p>
+            <div class="tech-pill-wrap">
+              <span class="tech-pill">Supabase RLS</span>
+              <span class="tech-pill">Apache JMeter</span>
+              <span class="tech-pill">Locust Load Testing</span>
+              <span class="tech-pill">WebSockets</span>
+              <span class="tech-pill">SSO Matrix</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3D CAREER TIMELINE STAGE -->
+      <section id="experience" class="section-wrap">
+        <div class="section-tag">// Career Journey</div>
+        <h2 class="section-title">Professional Experience</h2>
+        <p class="section-desc">
+          Interact with the 3D career timeline below or scroll through the detailed role breakdowns. All internal proprietary project names have been sanitized to enterprise industry standards.
+        </p>
+
+        <!-- Interactive 3D Canvas Box -->
+        <div class="stage-3d-wrap">
+          <canvas id="career-3d-canvas"></canvas>
+          <div class="stage-caption">✦ Drag to orbit 3D career trajectory · Scroll to zoom</div>
+        </div>
+
+        <!-- TIMELINE LIST -->
+        <div class="timeline">
+
+          <!-- ROLE 1: SKAI TECHNOLOGY -->
+          <article class="job-card">
+            <div class="job-node"></div>
+            <div class="job-content">
+              <div class="job-header">
+                <div>
+                  <h3 class="job-title">Senior QA Automation Engineer & AI Test Architect</h3>
+                  <div class="job-company">Skai Technology · Phnom Penh, Cambodia</div>
+                </div>
+                <div class="job-date">06/2026 — PRESENT</div>
+              </div>
+              <p class="job-summary">
+                Directing test automation architecture and quality engineering across high-velocity B2B SaaS platforms, mobile native applications, and enterprise financial integrations.
+              </p>
+              <ul class="job-bullets">
+                <li>
+                  <strong>Autonomous Multi-Agent Test Swarm:</strong> Architected a 3-agent specialist swarm (API/Security Specialist, Realtime/Webhooks Specialist, and UI/Workflow Specialist) executing parallel validation, cutting end-to-end regression cycles by 65%.
+                </li>
+                <li>
+                  <strong>Zero-Leak Authorization & Security:</strong> Eliminated cross-tenant authorization vulnerabilities by designing validation suites for Supabase Row Level Security (RLS) and additive role pyramids, guaranteeing 100% financial and billing data isolation.
+                </li>
+                <li>
+                  <strong>Comprehensive Web Automation:</strong> Automated 52 critical live-data user journeys in Playwright with a 100% pass rate, embedding 98 automated visual assertions and verifying real-time WebSocket sync latencies under 3 seconds.
+                </li>
+                <li>
+                  <strong>Cross-Platform Mobile Native Fleet QA:</strong> Engineered test architecture for cross-platform React Native/Expo apps across 5 extreme device profiles (Foldable viewports, Compact Android, Flagship Android, and compact/large iOS form factors), resolving viewport clipping defects prior to App Store submission.
+                </li>
+                <li>
+                  <strong>Mobile Pipeline Speed:</strong> Implemented automated mobile test pipelines using Maestro CLI, reducing smoke-test execution time from 4 hours to 18 minutes per release candidate build.
+                </li>
+                <li>
+                  <strong>AST-Level Code Defect Isolation:</strong> Diagnosed front-end defects down to the AST and component source level, isolating zero-width layout collapses and state race conditions directly in React Native code to accelerate developer remediation.
+                </li>
+                <li>
+                  <strong>Offline-Capable Audit Reporting:</strong> Engineered zero-dependency, single-file HTML audit reports with inline Base64 screenshot artifacts (10MB+), providing executive leadership and clients instant, standalone verification proof.
+                </li>
+                <li>
+                  <strong>High-Concurrency Load Benchmarks:</strong> Executed Production Verification Testing (PVT) and load benchmarks via Locust and Apache JMeter for high-traffic booking platforms and Tier-1 commercial banking single sign-on (SSO) integrations, ensuring zero data drops during traffic spikes.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- ROLE 2: DIGITAL ECONOMY COMMITTEE -->
+          <article class="job-card">
+            <div class="job-node"></div>
+            <div class="job-content">
+              <div class="job-header">
+                <div>
+                  <h3 class="job-title">Quality Assurance Engineer (Sole QA Lead)</h3>
+                  <div class="job-company">Digital Economy and Business Committee · Phnom Penh</div>
+                </div>
+                <div class="job-date">05/2024 — 01/2026</div>
+              </div>
+              <p class="job-summary">
+                Spearheaded comprehensive quality assurance and release engineering for national digital economy platforms and e-government portals.
+              </p>
+              <ul class="job-bullets">
+                <li>
+                  <strong>Institutional QA Standards:</strong> Established the organization’s foundational QA infrastructure, drafting Standard Operating Procedures (SOPs), bug classification matrices, and release sign-off gates adopted across all engineering teams.
+                </li>
+                <li>
+                  <strong>Concurrency & Stress Engineering:</strong> Identified concurrency bottlenecks prior to public rollouts by engineering high-volume stress and load testing suites in Apache JMeter, ensuring server stability under heavy public traffic spikes.
+                </li>
+                <li>
+                  <strong>AI-Assisted Efficiency:</strong> Accelerated test suite authoring by 50% by building prompt-engineering pipelines with Claude and ChatGPT to synthesize complex test matrices, edge-case permutations, and API payloads.
+                </li>
+                <li>
+                  <strong>Zero Critical Escapes:</strong> Maintained a 0% critical bug escape rate across production releases through rigorous manual, API, and cross-browser regression gates.
+                </li>
+                <li>
+                  <strong>Stakeholder Alignment:</strong> Aligned requirements between developers, product owners, and government executives through structured, data-backed daily release health dashboards.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- ROLE 3: INFINITY -->
+          <article class="job-card">
+            <div class="job-node"></div>
+            <div class="job-content">
+              <div class="job-header">
+                <div>
+                  <h3 class="job-title">Quality Assurance Engineer</h3>
+                  <div class="job-company">Infinity Information and App Dev · Phnom Penh</div>
+                </div>
+                <div class="job-date">01/2024 — 04/2024</div>
+              </div>
+              <p class="job-summary">
+                Delivered manual and API quality validation for client-facing web and mobile applications under rapid two-week sprint cycles.
+              </p>
+              <ul class="job-bullets">
+                <li>
+                  <strong>API Contract Verification:</strong> Prevented contract-breaking API changes by building comprehensive Postman test collections, validating JSON schemas, status codes, and latency across all backend services.
+                </li>
+                <li>
+                  <strong>Standardized Test Documentation:</strong> Authored 200+ detailed, reusable test cases covering positive, negative, boundary, and edge-case scenarios accessible to both technical and client stakeholders.
+                </li>
+                <li>
+                  <strong>Triage Optimization:</strong> Shortened defect triage lifecycles by 30% by submitting reproducible defect reports containing network logs, payload dumps, and environmental parameters.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- ROLE 4: TECHBODIA -->
+          <article class="job-card">
+            <div class="job-node"></div>
+            <div class="job-content">
+              <div class="job-header">
+                <div>
+                  <h3 class="job-title">Quality Assurance Engineer</h3>
+                  <div class="job-company">Techbodia · Phnom Penh</div>
+                </div>
+                <div class="job-date">03/2022 — 09/2022</div>
+              </div>
+              <p class="job-summary">
+                Developed test automation frameworks and executed performance engineering for enterprise software systems.
+              </p>
+              <ul class="job-bullets">
+                <li>
+                  <strong>Automated Regression Suites:</strong> Automated repetitive regression testing by implementing Selenium WebDriver (Python) and Playwright automation frameworks, cutting manual testing effort by 40%.
+                </li>
+                <li>
+                  <strong>System Response Benchmarking:</strong> Benchmarked system response boundaries using Apache JMeter, identifying database connection pool exhaustion and memory leaks under simulated load conditions.
+                </li>
+                <li>
+                  <strong>Agile Delivery:</strong> Integrated automated testing suites into team sprint cadences, participating in Agile ceremonies and executing rapid post-fix verification.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- ROLE 5: KIT -->
+          <article class="job-card">
+            <div class="job-node"></div>
+            <div class="job-content">
+              <div class="job-header">
+                <div>
+                  <h3 class="job-title">Quality Assurance Engineer / Project Lead</h3>
+                  <div class="job-company">Kirirom Institute of Technology · Kampong Speu</div>
+                </div>
+                <div class="job-date">02/2022 — 10/2022</div>
+              </div>
+              <p class="job-summary">
+                Led QA operations for computer vision systems and client SDK initiatives, reporting directly to executive leadership.
+              </p>
+              <ul class="job-bullets">
+                <li>
+                  <strong>Computer Vision & SDK QA:</strong> Led QA verification for mission-critical computer vision platforms, including Face Recognition Attendance Systems, License Plate Recognition (LPR) platforms, and client-facing Mobile SDKs.
+                </li>
+                <li>
+                  <strong>CI/CD Quality Gates:</strong> Built automated CI/CD quality gates using GitLab CI/CD, Jenkins, and Google Cloud Platform (GCP), preventing broken builds from progressing to staging.
+                </li>
+                <li>
+                  <strong>Executive Communication:</strong> Reported weekly milestone velocity directly to the CTO, translating technical defect metrics into clear risk assessments and release decisions.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- EDUCATION & CREDENTIALS -->
+      <section id="education" class="section-wrap">
+        <div class="section-tag">// Background</div>
+        <h2 class="section-title">Education & Certifications</h2>
+        <p class="section-desc">Academic foundation in Software Engineering paired with formal leadership training.</p>
+
+        <div class="edu-grid">
+          <div class="edu-card">
+            <h3 class="edu-title">Bachelor of Science in Software Engineering</h3>
+            <div class="edu-inst">Kirirom Institute of Technology (KIT)</div>
+            <div class="edu-loc">Kampong Speu, Cambodia</div>
+          </div>
+
+          <div class="edu-card">
+            <h3 class="edu-title">Leadership Program Short Course</h3>
+            <div class="edu-inst">University of the Thai Chamber of Commerce (UTCC)</div>
+            <div class="edu-loc">Bangkok, Thailand</div>
+          </div>
+        </div>
+
+        <div class="dual-grid" id="awards">
+          <!-- AWARDS -->
+          <div class="award-card">
+            <div class="award-row">
+              <span class="award-badge">1ST RUNNER-UP</span>
+              <div class="award-info">
+                <h4>AWS Build on Cambodia Hackathon</h4>
+                <p>Awarded 1st Runner-Up for cloud architectural innovation · 2021</p>
+              </div>
+            </div>
+            <div class="award-row">
+              <span class="award-badge">PARTICIPANT</span>
+              <div class="award-info">
+                <h4>SmartStart & SmartSpark Innovation Programs</h4>
+                <p>Completed intensive startup innovation tracks · 2021</p>
+              </div>
+            </div>
+            <div class="award-row">
+              <span class="award-badge">FINALIST</span>
+              <div class="award-info">
+                <h4>Techno Innovation Cambodia Hackathon</h4>
+                <p>Structured business models and market growth strategies · 2021</p>
+              </div>
+            </div>
+            <div class="award-row">
+              <span class="award-badge">IELTS 6.5</span>
+              <div class="award-info">
+                <h4>IELTS Academic Certification</h4>
+                <p>Overall Band Score: 6.5 (Advanced English Fluency) · 2018</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- LANGUAGES -->
+          <div class="lang-box">
+            <div class="lang-item">
+              <div class="lang-top"><span>Khmer</span> <span>Native</span></div>
+              <div class="lang-progress"><div class="lang-fill" style="width: 100%"></div></div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-top"><span>English</span> <span>Advanced (IELTS 6.5)</span></div>
+              <div class="lang-progress"><div class="lang-fill" style="width: 85%"></div></div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-top"><span>French</span> <span>Intermediate</span></div>
+              <div class="lang-progress"><div class="lang-fill" style="width: 55%"></div></div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-top"><span>Japanese</span> <span>Elementary</span></div>
+              <div class="lang-progress"><div class="lang-fill" style="width: 25%"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT SECTION -->
+      <section id="contact">
+        <div class="contact-container">
+          <div class="section-tag" style="justify-content: center;">// Get in Touch</div>
+          <h2 class="contact-title">Let's Build Reliable Software Together.</h2>
+          <p class="contact-desc">
+            Whether you are scaling an engineering organization, seeking an AI-native QA Test Architect, or looking to automate complex release workflows, I'd love to connect.
+          </p>
+
+          <div class="contact-methods">
+            <a href="mailto:Tekzanith@gmail.com" class="contact-card-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Tekzanith@gmail.com
+            </a>
+            <a href="tel:+85585930693" class="contact-card-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +855 85930693
+            </a>
+            <div class="contact-card-link" style="cursor: default;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Phnom Penh, Cambodia
+            </div>
+          </div>
+
+          <a href="TekZanith_CV_Updated.pdf" target="_blank" class="btn btn-primary" download>
+            Download Complete Resume (PDF)
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2026 Tek Zanith · Senior QA Automation Engineer & AI Test Architect · Built with Three.js</p>
+    </footer>
+
+  </div>
+
+  <!-- THREE.JS INTERACTIVE SCRIPTS -->
+  <script>
+    // 1. BACKGROUND FLOATING PARTICLES SCENE
+    (function initBackgroundThree() {
+      const canvas = document.getElementById('three-bg');
+      if (!canvas) return;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 35;
+
+      const particleCount = 1200;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * 110;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 90;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 60;
+
+        const rand = Math.random();
+        if (rand < 0.6) {
+          // Cyan / Primary
+          colors[i * 3] = 0.22;
+          colors[i * 3 + 1] = 0.74;
+          colors[i * 3 + 2] = 0.97;
+        } else if (rand < 0.85) {
+          // Emerald accent
+          colors[i * 3] = 0.06;
+          colors[i * 3 + 1] = 0.72;
+          colors[i * 3 + 2] = 0.50;
+        } else {
+          // Clean white
+          colors[i * 3] = 0.85;
+          colors[i * 3 + 1] = 0.90;
+          colors[i * 3 + 2] = 1.0;
+        }
+      }
+
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      const material = new THREE.PointsMaterial({
+        size: 0.28,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.45
+      });
+
+      const particleSystem = new THREE.Points(geometry, material);
+      scene.add(particleSystem);
+
+      // Subtle mouse parallax
+      let mouseX = 0, mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+      });
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      let clock = 0;
+      function animate() {
+        requestAnimationFrame(animate);
+        clock += 0.0015;
+        particleSystem.rotation.y = clock * 0.08 + mouseX * 0.05;
+        particleSystem.rotation.x = clock * 0.04 + mouseY * 0.05;
+        renderer.render(scene, camera);
+      }
+      animate();
+    })();
+
+    // 2. INTERACTIVE 3D CAREER TIMELINE TRAJECTORY
+    (function initCareerTimelineThree() {
+      const canvas = document.getElementById('career-3d-canvas');
+      if (!canvas) return;
+
+      const container = canvas.parentElement;
+      const width = container.offsetWidth;
+      const height = 380;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(width, height);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+      camera.position.set(0, 2, 16);
+
+      // Career milestones nodes in 3D space
+      const milestones = [
+        { label: "KIT (2022)", x: -6, y: -2, z: 2, color: 0x38bdf8 },
+        { label: "Techbodia (2022)", x: -3, y: -0.8, z: -1, color: 0x60a5fa },
+        { label: "Infinity (2024)", x: 0, y: 0.2, z: 1.5, color: 0x818cf8 },
+        { label: "DEB Committee (2024-2026)", x: 3, y: 1.2, z: -0.5, color: 0x34d399 },
+        { label: "Skai Technology (Present)", x: 6, y: 2.2, z: 2, color: 0x38bdf8 }
+      ];
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      // Curve connecting milestones
+      const curvePoints = milestones.map(m => new THREE.Vector3(m.x, m.y, m.z));
+      const curve = new THREE.CatmullRomCurve3(curvePoints);
+      const tubeGeometry = new THREE.TubeGeometry(curve, 64, 0.07, 8, false);
+      const tubeMaterial = new THREE.MeshBasicMaterial({
+        color: 0x38bdf8,
+        transparent: true,
+        opacity: 0.4,
+        wireframe: true
+      });
+      const tubeMesh = new THREE.Mesh(tubeGeometry, tubeMaterial);
+      group.add(tubeMesh);
+
+      // Create glowing nodes & outer rings
+      milestones.forEach((m) => {
+        const sphereGeo = new THREE.SphereGeometry(0.35, 24, 24);
+        const sphereMat = new THREE.MeshBasicMaterial({ color: m.color });
+        const sphere = new THREE.Mesh(sphereGeo, sphereMat);
+        sphere.position.set(m.x, m.y, m.z);
+        group.add(sphere);
+
+        // Orbit ring
+        const ringGeo = new THREE.RingGeometry(0.5, 0.58, 32);
+        const ringMat = new THREE.MeshBasicMaterial({ color: m.color, side: THREE.DoubleSide, transparent: true, opacity: 0.6 });
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.position.set(m.x, m.y, m.z);
+        ring.rotation.x = Math.PI / 2;
+        group.add(ring);
+      });
+
+      // Drag to orbit controls
+      let isDragging = false;
+      let prevX = 0, prevY = 0;
+      let rotY = 0.2, rotX = 0.1;
+
+      canvas.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        prevX = e.clientX;
+        prevY = e.clientY;
+      });
+
+      window.addEventListener('mouseup', () => isDragging = false);
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - prevX;
+        const deltaY = e.clientY - prevY;
+        rotY += deltaX * 0.006;
+        rotX += deltaY * 0.006;
+        rotX = Math.max(-0.6, Math.min(0.6, rotX));
+        prevX = e.clientX;
+        prevY = e.clientY;
+      });
+
+      // Touch controls for mobile
+      canvas.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          isDragging = true;
+          prevX = e.touches[0].clientX;
+          prevY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      window.addEventListener('touchend', () => isDragging = false);
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging || e.touches.length !== 1) return;
+        const deltaX = e.touches[0].clientX - prevX;
+        const deltaY = e.touches[0].clientY - prevY;
+        rotY += deltaX * 0.006;
+        rotX += deltaY * 0.006;
+        rotX = Math.max(-0.6, Math.min(0.6, rotX));
+        prevX = e.touches[0].clientX;
+        prevY = e.touches[0].clientY;
+      }, { passive: true });
+
+      window.addEventListener('resize', () => {
+        const newW = container.offsetWidth;
+        camera.aspect = newW / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(newW, height);
+      });
+
+      let autoTime = 0;
+      function animateTimeline() {
+        requestAnimationFrame(animateTimeline);
+        if (!isDragging) {
+          autoTime += 0.003;
+          group.rotation.y = rotY + Math.sin(autoTime) * 0.15;
+          group.rotation.x = rotX + Math.cos(autoTime * 0.8) * 0.05;
+        } else {
+          group.rotation.y = rotY;
+          group.rotation.x = rotX;
+        }
+        renderer.render(scene, camera);
+      }
+      animateTimeline();
+    })();
+  </script>
+</body>
+</html>
