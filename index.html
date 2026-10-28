@@ -901,6 +901,62 @@
       background: rgba(239, 68, 68, 0.15);
       border: 1px solid rgba(239, 68, 68, 0.4);
       color: #f87171;
+    /* API ACTIVITY MONITOR HUD */
+    .api-hud {
+      position: fixed;
+      bottom: 22px;
+      right: 26px;
+      z-index: 1000;
+      background: #090e1a;
+      color: #38bdf8;
+      border: 1.5px solid #38bdf8;
+      padding: 7px 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      border-radius: 8px;
+      transition: all 0.25s ease;
+      pointer-events: none;
+    }
+    .hud-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 10px #34d399;
+      flex-shrink: 0;
+    }
+    .hud-indicator.busy {
+      background: #fbbf24;
+      box-shadow: 0 0 10px #fbbf24;
+      animation: pulse 1s infinite;
+    }
+    .hud-latency {
+      opacity: 0.75;
+      font-size: 10px;
+      margin-left: 4px;
+      color: #94a3b8;
+    }
+    .api-filter-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .api-filter-btn:hover, .api-filter-btn.active {
+      background: var(--primary);
+      color: #031326;
+      border-color: var(--primary);
+      font-weight: 700;
     }
   </style>
 </head>
@@ -995,6 +1051,15 @@
           Structured for maximum clarity and fast scanning. Every methodology and tool has been battle-tested across enterprise production environments.
         </p>
 
+        <!-- Interactive API Competency Filters -->
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
+          <button class="api-filter-btn active" onclick="fetchSkills('all', this)">All Competencies (GET /api/skills)</button>
+          <button class="api-filter-btn" onclick="fetchSkills('automation', this)">Automation</button>
+          <button class="api-filter-btn" onclick="fetchSkills('ai', this)">AI & Agents</button>
+          <button class="api-filter-btn" onclick="fetchSkills('mobile', this)">Mobile QA</button>
+          <button class="api-filter-btn" onclick="fetchSkills('security', this)">Backend & Security</button>
+          <button class="api-filter-btn" onclick="fetchSkills('devops', this)">DevOps & CI/CD</button>
+        </div>
         <div class="skills-grid">
           <div class="skill-card">
             <div class="skill-icon">⚡</div>
@@ -1063,6 +1128,13 @@
           <div class="stage-caption">✦ Drag to orbit 3D career trajectory · Scroll to zoom</div>
         </div>
 
+        <!-- Interactive API Timeline Filter -->
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
+          <button class="api-filter-btn active" onclick="fetchExperience('all', this)">All Positions (GET /api/experience)</button>
+          <button class="api-filter-btn" onclick="fetchExperience('skai', this)">Skai Technology Lead</button>
+          <button class="api-filter-btn" onclick="fetchExperience('deb', this)">E-Government QA</button>
+          <button class="api-filter-btn" onclick="fetchExperience('early', this)">Early Roles & KIT</button>
+        </div>
         <!-- TIMELINE LIST -->
         <div class="timeline">
 
@@ -1614,6 +1686,115 @@
         btn.innerText = 'Submit Inquiry (POST /api/contact)';
       }
     }
+  </script>
+  <!-- Live API Request Monitor HUD -->
+  <div id="api-hud" class="api-hud">
+    <span id="hud-indicator" class="hud-indicator"></span>
+    <span id="hud-message">API: Connected (/api)</span>
+    <span id="hud-latency" class="hud-latency"></span>
+  </div>
+
+  <script>
+    const API_BASE = (window.location.protocol === 'file:' || window.location.hostname.includes('github.io'))
+      ? 'https://tekzanith-portfolio.vercel.app'
+      : '';
+
+    async function apiRequest(endpoint, options = {}) {
+      const ind = document.getElementById('hud-indicator');
+      const msg = document.getElementById('hud-message');
+      const lat = document.getElementById('hud-latency');
+      const method = options.method || 'GET';
+      const startTime = performance.now();
+
+      if (ind) ind.className = 'hud-indicator busy';
+      if (msg) msg.innerText = method + ' ' + endpoint + '...';
+      if (lat) lat.innerText = '';
+
+      try {
+        const res = await fetch(API_BASE + endpoint, options);
+        const data = await res.json();
+        const duration = Math.round(performance.now() - startTime);
+
+        if (ind) ind.className = 'hud-indicator';
+        if (msg) msg.innerText = method + ' ' + endpoint + ' [' + res.status + ' OK]';
+        if (lat) lat.innerText = duration + 'ms';
+        console.log('[3D API Call]', method, endpoint, res.status, duration + 'ms', data);
+        return { ok: res.ok, status: res.status, data: data };
+      } catch (err) {
+        const duration = Math.round(performance.now() - startTime);
+        if (ind) ind.className = 'hud-indicator';
+        if (msg) msg.innerText = method + ' ' + endpoint + ' [ERR]';
+        if (lat) lat.innerText = duration + 'ms';
+        console.warn('[3D API Error]', method, endpoint, err);
+        return { ok: false, status: 0, error: err.message };
+      }
+    }
+
+    // Interactive Skills Filter Button Handler
+    async function fetchSkills(category, btn) {
+      if (btn) {
+        document.querySelectorAll('#skills .api-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      const res = await apiRequest('/api/skills');
+      if (res.ok && res.data && res.data.data) {
+        const cards = document.querySelectorAll('.skills-grid .skill-card');
+        cards.forEach((card, idx) => {
+          const catName = card.querySelector('.skill-name')?.innerText.toLowerCase() || '';
+          if (category === 'all' || catName.includes(category)) {
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+            card.style.borderColor = 'var(--primary)';
+          } else {
+            card.style.opacity = '0.35';
+            card.style.transform = 'scale(0.98)';
+            card.style.borderColor = 'var(--border)';
+          }
+        });
+      }
+    }
+
+    // Interactive Experience Filter Button Handler
+    async function fetchExperience(roleGroup, btn) {
+      if (btn) {
+        document.querySelectorAll('#experience .api-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      const res = await apiRequest('/api/experience');
+      if (res.ok && res.data && res.data.data) {
+        const jobs = document.querySelectorAll('.timeline .job-card');
+        jobs.forEach((job, idx) => {
+          const title = job.querySelector('.job-title')?.innerText.toLowerCase() || '';
+          const company = job.querySelector('.job-company')?.innerText.toLowerCase() || '';
+          let match = true;
+          if (roleGroup === 'skai') match = company.includes('skai');
+          else if (roleGroup === 'deb') match = company.includes('digital economy') || company.includes('committee');
+          else if (roleGroup === 'early') match = company.includes('techbodia') || company.includes('kirirom') || company.includes('infinity');
+
+          if (match) {
+            job.style.display = 'block';
+            job.style.opacity = '1';
+          } else {
+            job.style.display = 'none';
+          }
+        });
+      }
+    }
+
+    // Dynamic Stats Hydration on Load
+    window.addEventListener('DOMContentLoaded', async () => {
+      const res = await apiRequest('/api/stats');
+      if (res.ok && res.data && res.data.data) {
+        const s = res.data.data;
+        const statsBoxes = document.querySelectorAll('.stats-strip .stat-box .stat-number');
+        if (statsBoxes.length >= 4) {
+          if (s.yearsExperience) statsBoxes[0].innerHTML = s.yearsExperience + ' <span>YRS</span>';
+          if (s.regressionReduction) statsBoxes[1].innerHTML = s.regressionReduction + ' <span>CUT</span>';
+          if (s.automatedPassRate) statsBoxes[2].innerHTML = s.automatedPassRate + ' <span>PASS</span>';
+          if (s.ieltsScore) statsBoxes[3].innerHTML = s.ieltsScore + ' <span>IELTS</span>';
+        }
+      }
+    });
   </script>
 </body>
 </html>
