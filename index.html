@@ -13,46 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Three.js CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
-    // Contact Form Handler for POST /api/contact
-    async function handleContactSubmit(e) {
-      e.preventDefault();
-      const btn = document.getElementById('contact-submit-btn');
-      const feedback = document.getElementById('contact-feedback');
-      const name = document.getElementById('contact-name').value;
-      const email = document.getElementById('contact-email').value;
-      const subject = document.getElementById('contact-subject').value;
-      const message = document.getElementById('contact-message').value;
-
-      btn.disabled = true;
-      btn.innerText = 'Sending to /api/contact...';
-      feedback.className = 'form-submit-feedback';
-      feedback.style.display = 'none';
-
-      try {
-        const res = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, subject, message })
-        });
-        const data = await res.json();
-        if (res.ok) {
-          feedback.className = 'form-submit-feedback success';
-          feedback.innerText = '✓ ' + data.message + (data.referenceId ?  : '');
-          document.getElementById('contact-form').reset();
-        } else {
-          feedback.className = 'form-submit-feedback error';
-          feedback.innerText = '✗ ' + (data.error || 'Failed to submit inquiry.');
-        }
-      } catch (err) {
-        feedback.className = 'form-submit-feedback error';
-        feedback.innerText = 'Network error contacting /api/contact. Direct email: Tekzanith@gmail.com';
-      } finally {
-        btn.disabled = false;
-        btn.innerText = 'Submit Inquiry (POST /api/contact)';
-      }
-    }
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <style>
     :root {
@@ -1417,7 +1378,7 @@
               <textarea id="contact-message" name="message" rows="4" class="form-control-input" placeholder="Your message..." required></textarea>
             </div>
             <button type="submit" id="contact-submit-btn" class="btn btn-primary" style="width: 100%;">
-              Submit Inquiry (POST /api/contact)
+              Submit Inquiry
             </button>
             <div id="contact-feedback" class="form-submit-feedback"></div>
           </form>
@@ -1683,8 +1644,7 @@
         feedback.innerText = 'Network error contacting /api/contact. Direct email: Tekzanith@gmail.com';
       } finally {
         btn.disabled = false;
-        btn.innerText = 'Submit Inquiry (POST /api/contact)';
-      }
+        btn.innerText = 'Submit Inquiry';
     }
   </script>
   <!-- Live API Request Monitor HUD -->
