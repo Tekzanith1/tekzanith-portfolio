@@ -13,7 +13,46 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Three.js CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
+    // Contact Form Handler for POST /api/contact
+    async function handleContactSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('contact-submit-btn');
+      const feedback = document.getElementById('contact-feedback');
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const subject = document.getElementById('contact-subject').value;
+      const message = document.getElementById('contact-message').value;
+
+      btn.disabled = true;
+      btn.innerText = 'Sending to /api/contact...';
+      feedback.className = 'form-submit-feedback';
+      feedback.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, subject, message })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          feedback.className = 'form-submit-feedback success';
+          feedback.innerText = '✓ ' + data.message + (data.referenceId ?  : '');
+          document.getElementById('contact-form').reset();
+        } else {
+          feedback.className = 'form-submit-feedback error';
+          feedback.innerText = '✗ ' + (data.error || 'Failed to submit inquiry.');
+        }
+      } catch (err) {
+        feedback.className = 'form-submit-feedback error';
+        feedback.innerText = 'Network error contacting /api/contact. Direct email: Tekzanith@gmail.com';
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'Submit Inquiry (POST /api/contact)';
+      }
+    }
+  </script>
 
   <style>
     :root {
@@ -809,6 +848,60 @@
         padding: 22px 18px;
       }
     }
+  
+    /* API-POWERED CONTACT FORM */
+    .contact-form {
+      margin-top: 36px;
+      text-align: left;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    .form-group-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 600px) {
+      .form-group-row { grid-template-columns: 1fr; }
+    }
+    .form-control-input {
+      width: 100%;
+      background: #090e1a;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: #ffffff;
+      font-family: var(--font-main);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-control-input:focus {
+      border-color: var(--primary);
+    }
+    .form-submit-feedback {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      display: none;
+    }
+    .form-submit-feedback.success {
+      display: block;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+    }
+    .form-submit-feedback.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #f87171;
+    }
   </style>
 </head>
 <body>
@@ -832,6 +925,9 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="nav-actions">
+        <a href="/api" target="_blank" class="btn btn-outline" style="padding: 7px 14px; font-size: 0.8rem; font-family: var(--font-mono); display: inline-flex; align-items: center; gap: 7px;">
+          <span style="width:7px;height:7px;background:#10b981;border-radius:50%;display:inline-block;box-shadow:0 0 8px #10b981;"></span> REST API
+        </a>
         <a href="TekZanith_CV_Updated.pdf" target="_blank" class="btn btn-outline" download>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Download CV (PDF)
@@ -1233,9 +1329,32 @@
             </div>
           </div>
 
-          <a href="TekZanith_CV_Updated.pdf" target="_blank" class="btn btn-primary" download>
-            Download Complete Resume (PDF)
-          </a>
+          
+          <!-- API-Powered Contact Form -->
+          <form class="contact-form" id="contact-form" onsubmit="handleContactSubmit(event)">
+            <h3 style="font-size: 1.18rem; color: #fff; margin-bottom: 4px; font-weight: 700;">Send Direct Message</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Processed securely via backend serverless endpoint <code>POST /api/contact</code></p>
+            <div class="form-group-row">
+              <input type="text" id="contact-name" name="name" class="form-control-input" placeholder="Your Name" required>
+              <input type="email" id="contact-email" name="email" class="form-control-input" placeholder="Your Email" required>
+            </div>
+            <div style="margin-bottom: 16px;">
+              <input type="text" id="contact-subject" name="subject" class="form-control-input" placeholder="Subject (e.g. Lead QA Opportunity)">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <textarea id="contact-message" name="message" rows="4" class="form-control-input" placeholder="Your message..." required></textarea>
+            </div>
+            <button type="submit" id="contact-submit-btn" class="btn btn-primary" style="width: 100%;">
+              Submit Inquiry (POST /api/contact)
+            </button>
+            <div id="contact-feedback" class="form-submit-feedback"></div>
+          </form>
+
+          <div style="margin-top: 30px;">
+            <a href="TekZanith_CV_Updated.pdf" target="_blank" class="btn btn-primary" download>
+              Download Complete Resume (PDF)
+            </a>
+          </div>
         </div>
       </section>
 
@@ -1456,6 +1575,45 @@
       }
       animateTimeline();
     })();
+
+    // Contact Form Handler for POST /api/contact
+    async function handleContactSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('contact-submit-btn');
+      const feedback = document.getElementById('contact-feedback');
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const subject = document.getElementById('contact-subject').value;
+      const message = document.getElementById('contact-message').value;
+
+      btn.disabled = true;
+      btn.innerText = 'Sending to /api/contact...';
+      feedback.className = 'form-submit-feedback';
+      feedback.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, subject, message })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          feedback.className = 'form-submit-feedback success';
+          feedback.innerText = '✓ ' + data.message + (data.referenceId ? ' Reference ID: ' + data.referenceId : '');
+          document.getElementById('contact-form').reset();
+        } else {
+          feedback.className = 'form-submit-feedback error';
+          feedback.innerText = '✗ ' + (data.error || 'Failed to submit inquiry.');
+        }
+      } catch (err) {
+        feedback.className = 'form-submit-feedback error';
+        feedback.innerText = 'Network error contacting /api/contact. Direct email: Tekzanith@gmail.com';
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'Submit Inquiry (POST /api/contact)';
+      }
+    }
   </script>
 </body>
 </html>

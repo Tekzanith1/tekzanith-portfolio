@@ -1,0 +1,14 @@
+{
+  "name": "tekzanith-3d-portfolio",
+  "version": "1.0.0",
+  "description": "Full-stack interactive 3D portfolio and REST API for Tek Zanith",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node -e \"const http=require('http'); const s=require('./server.js').listen(3001, ()=>{ http.get('http://localhost:3001/api/health', (r)=>{ console.log('API Health Check:', r.statusCode); s.close(); process.exit(r.statusCode===200?0:1); }); });\""
+  },
+  "keywords": ["portfolio", "qa-engineer", "sdet", "threejs", "fullstack", "api"],
+  "author": "Tek Zanith",
+  "license": "MIT"
+}

@@ -1,0 +1,224 @@
+{
+  "profile": {
+    "name": "Tek Zanith",
+    "title": "Senior QA Automation Engineer | AI & Test Architecture Lead",
+    "location": "Phnom Penh, Cambodia",
+    "email": "Tekzanith@gmail.com",
+    "phone": "+855 85930693",
+    "languages": [
+      { "language": "Khmer", "level": "Native", "percent": 100 },
+      { "language": "English", "level": "Advanced (IELTS 6.5)", "percent": 85 },
+      { "language": "French", "level": "Intermediate", "percent": 55 },
+      { "language": "Japanese", "level": "Elementary", "percent": 25 }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Software Engineering",
+        "institution": "Kirirom Institute of Technology (KIT)",
+        "location": "Kampong Speu, Cambodia"
+      },
+      {
+        "degree": "Leadership Program Short Course",
+        "institution": "University of the Thai Chamber of Commerce (UTCC)",
+        "location": "Bangkok, Thailand"
+      }
+    ],
+    "awards": [
+      { "title": "AWS Build on Cambodia Hackathon", "award": "1st Runner-Up", "year": "2021" },
+      { "title": "SmartStart & SmartSpark Innovation Programs", "award": "Participant", "year": "2021" },
+      { "title": "Techno Innovation Cambodia Hackathon", "award": "Finalist", "year": "2021" },
+      { "title": "IELTS Academic Certification", "award": "Band 6.5", "year": "2018" }
+    ]
+  },
+  "stats": {
+    "yearsExperience": "4+",
+    "regressionReduction": "65%",
+    "automatedPassRate": "100%",
+    "mobileSmokeTime": "18m",
+    "ieltsScore": "6.5"
+  },
+  "skills": [
+    {
+      "category": "Test Automation & Architecture",
+      "icon": "⚡",
+      "description": "Architecting deterministic end-to-end automation, regression gates, and scalable test harnesses that run reliably in CI/CD without flaky assertions.",
+      "tags": ["Playwright", "Maestro CLI", "Selenium WebDriver", "Postman API", "Bun Test", "Regression Suites"]
+    },
+    {
+      "category": "AI & Agentic Orchestration",
+      "icon": "🤖",
+      "description": "Pioneering multi-agent test swarms, model routing protocols (Opus, Sonnet, Codex), and AST-level root-cause debugging directly in application source code.",
+      "tags": ["Multi-Agent Swarms", "Model Routing", "Prompt Engineering", "AST Bug Isolation", "Synthetic Test Data"]
+    },
+    {
+      "category": "Mobile & Multi-Platform QA",
+      "icon": "📱",
+      "description": "Comprehensive certification across device fleets, handling dynamic viewports, foldable screens, and compact form factor constraints under native runtimes.",
+      "tags": ["React Native", "Expo SDK", "Android API 36/37", "iOS Simulator", "Pixel Fold", "Device Fleets"]
+    },
+    {
+      "category": "Backend, Security & Concurrency",
+      "icon": "🛡️",
+      "description": "Validating data privacy at the database boundary, load-testing high-concurrency APIs, and asserting real-time WebSockets and webhook delivery.",
+      "tags": ["Supabase RLS", "PostgreSQL", "Apache JMeter", "Locust Load Testing", "WebSockets", "SSO Matrices"]
+    },
+    {
+      "category": "DevOps, CI/CD & Reporting",
+      "icon": "🚀",
+      "description": "Engineering shift-left CI/CD pipelines, automated status reporting, and zero-dependency standalone HTML evidence engines.",
+      "tags": ["GitLab CI/CD", "GitHub Actions", "Jenkins", "Zero-Dependency HTML", "Google Sheets API", "Trello Sync"]
+    }
+  ],
+  "projects": [
+    {
+      "id": "enterprise-b2b-saas",
+      "title": "Enterprise Multi-Tenant B2B SaaS Platform",
+      "category": "professional",
+      "tags": ["Playwright", "Supabase RLS", "Multi-Agent Swarm", "WebSockets"],
+      "summary": "Architected an autonomous 3-agent testing swarm (API/RLS, Webhooks, UI/DOM) executing parallel regression across multi-role hierarchies, cutting full test cycles by 65%.",
+      "highlights": [
+        "Architected a 3-agent specialist swarm running parallel validation, cutting regression cycles by 65%.",
+        "Designed validation suites for Supabase Row Level Security (RLS) guaranteeing 100% financial privacy isolation.",
+        "Automated 52 critical live-data user journeys in Playwright with a 100% pass rate and 98 visual assertions.",
+        "Verified real-time WebSocket sync latencies and webhook lifecycles under 3 seconds."
+      ]
+    },
+    {
+      "id": "mobile-native-app",
+      "title": "Cross-Platform Mobile Native Application",
+      "category": "mobile",
+      "tags": ["React Native", "Expo", "Maestro CLI", "Pixel Fold", "iOS"],
+      "summary": "Automated mobile user journeys across 5 extreme device form factors (Foldable, compact Android, and flagship iOS/Android). Diagnosed front-end defects down to AST component code.",
+      "highlights": [
+        "Automated mobile user journeys across 5 extreme device form factors including Pixel Fold and iPhone SE.",
+        "Implemented mobile automation pipelines using Maestro CLI, compressing smoke runs from 4 hours to 18 minutes.",
+        "Diagnosed front-end defects down to the AST and component source level in React Native."
+      ]
+    },
+    {
+      "id": "egov-qa-infrastructure",
+      "title": "National E-Government Platform & QA Infrastructure",
+      "category": "fintech",
+      "tags": ["Apache JMeter", "Postman API", "Stress Testing", "Agile Lead"],
+      "summary": "Sole QA Lead establishing foundational testing standards, SOPs, and defect classification for national public services. Executed JMeter stress testing ensuring 0% critical escapes.",
+      "highlights": [
+        "Authored organization-wide Standard Operating Procedures (SOPs) and release sign-off gates.",
+        "Identified concurrency bottlenecks prior to public rollouts using Apache JMeter stress suites.",
+        "Accelerated test suite authoring by 50% using AI prompt-engineering pipelines.",
+        "Maintained a 0% critical bug escape rate across all production releases."
+      ]
+    },
+    {
+      "id": "ai-testing-swarm",
+      "title": "Multi-Agent Swarm & Model-Routing Harness",
+      "category": "ai",
+      "tags": ["Model Routing", "Claude Opus", "Codex Sol", "Prompt Engineering"],
+      "summary": "Production model-routing test harness pairing Claude Opus (UI state), Claude Sonnet (screen ports), and OpenAI Codex (backend DB & concurrency tests) with cross-model peer review.",
+      "highlights": [
+        "Implemented Model Routing delegating UI tasks to Opus and backend concurrency to Codex.",
+        "Automated cross-model peer reviews between models.",
+        "Designed prompt engineering frameworks for synthetic test data and deterministic mocks."
+      ]
+    },
+    {
+      "id": "fintech-banking-sso",
+      "title": "High-Concurrency Booking Engines & Tier-1 Banking SSO",
+      "category": "fintech",
+      "tags": ["Locust", "OAuth / SSO", "JMeter", "PVT Testing"],
+      "summary": "Executed Production Verification Testing (PVT) and load benchmarks under peak concurrency, validating OAuth/SSO login matrices and zero-drop transactional integrity.",
+      "highlights": [
+        "Executed Production Verification Testing (PVT) under peak concurrency with zero data drops.",
+        "Validated complex single sign-on (SSO) login matrices for Tier-1 commercial banking integrations.",
+        "Identified database connection pool exhaustion using Locust and JMeter load testing."
+      ]
+    },
+    {
+      "id": "computer-vision-sdk",
+      "title": "Computer Vision & License Plate Recognition Systems",
+      "category": "mobile",
+      "tags": ["Computer Vision", "GitLab CI/CD", "Jenkins", "Mobile SDK"],
+      "summary": "Led quality engineering and CI/CD pipeline automation for AI computer vision attendance, license plate recognition, and international client mobile SDKs.",
+      "highlights": [
+        "Led QA verification for Face Recognition Attendance, License Plate Recognition, and Mobile SDKs.",
+        "Built automated CI/CD quality gates using GitLab CI/CD, Jenkins, and Google Cloud Platform (GCP).",
+        "Reported weekly milestone velocity directly to executive leadership and the CTO."
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Senior QA Automation Engineer & AI Test Architect",
+      "company": "Skai Technology",
+      "location": "Phnom Penh, Cambodia",
+      "period": "06/2026 – PRESENT",
+      "summary": "Directing test automation architecture and quality engineering across high-velocity B2B SaaS, mobile native, and enterprise financial platforms.",
+      "bullets": [
+        "Autonomous Multi-Agent Test Swarms: Architected a 3-agent specialist swarm (API/Security, Realtime/Webhooks, UI/Workflow) running parallel validation across multi-tenant B2B SaaS platforms, cutting full regression verification cycles by 65%.",
+        "Zero-Leak Authorization & Security: Eliminated cross-tenant authorization vulnerabilities by designing validation suites for Supabase Row Level Security (RLS) and additive role pyramids, guaranteeing 100% financial and billing data isolation.",
+        "Deterministic Web & API Automation: Automated 52 critical live-data user journeys in Playwright with a 100% pass rate, embedding 98 automated visual assertions and verifying real-time WebSocket sync latencies under 3 seconds.",
+        "Cross-Platform Mobile Fleet Architecture: Engineered cross-platform mobile test architecture for React Native/Expo apps across 5 extreme device profiles (foldable viewports, compact Android, and flagship iOS/Android), resolving responsive coordinate clipping before production releases.",
+        "Mobile Pipeline Speed & AST Bug Isolation: Implemented Maestro CLI automation reducing smoke test runs from 4 hours to 18 minutes, and diagnosed defects down to the AST and component source code level to accelerate developer fix velocity.",
+        "Enterprise Load Testing & Standalone Reporting: Executed Locust and JMeter load benchmarks under high-concurrency SSO traffic, and engineered zero-dependency HTML audit reports with inline Base64 proofs for client and executive sign-off."
+      ]
+    },
+    {
+      "role": "Quality Assurance Engineer (Sole QA Lead)",
+      "company": "Digital Economy and Business Committee",
+      "location": "Phnom Penh, Cambodia",
+      "period": "05/2024 – 01/2026",
+      "summary": "Spearheaded quality assurance and release engineering for national digital economy platforms and e-government portals.",
+      "bullets": [
+        "Institutional QA Infrastructure: Established the organization’s foundational QA infrastructure, authoring Standard Operating Procedures (SOPs), bug classification matrices, and release sign-off gates adopted across all engineering teams.",
+        "Concurrency & Stress Engineering: Identified concurrency bottlenecks prior to public rollouts by engineering high-volume stress and load testing suites in Apache JMeter, ensuring server stability under heavy public traffic spikes.",
+        "AI-Assisted Efficiency: Accelerated test suite authoring by 50% by designing prompt-engineering pipelines with Claude and ChatGPT to synthesize complex test matrices, edge-case permutations, and API payloads.",
+        "Zero Critical Escapes: Maintained a 0% critical bug escape rate across production releases through rigorous manual, API, and cross-browser regression gates."
+      ]
+    },
+    {
+      "role": "Quality Assurance Engineer",
+      "company": "Infinity Information and App Dev",
+      "location": "Phnom Penh, Cambodia",
+      "period": "01/2024 – 04/2024",
+      "summary": "Delivered manual and API quality validation for client web and mobile applications under rapid two-week sprint cycles.",
+      "bullets": [
+        "API Contract Verification: Prevented contract-breaking API changes by building comprehensive Postman test collections, validating JSON schemas, status codes, and latency across all backend services.",
+        "Comprehensive Test Documentation: Authored 200+ detailed, reusable test cases covering positive, negative, boundary, and edge-case scenarios accessible to both technical and client stakeholders.",
+        "Triage Optimization: Shortened defect triage lifecycles by 30% by submitting reproducible defect reports containing network logs, payload dumps, and environmental parameters."
+      ]
+    },
+    {
+      "role": "Quality Assurance Engineer",
+      "company": "Techbodia",
+      "location": "Phnom Penh, Cambodia",
+      "period": "03/2022 – 09/2022",
+      "summary": "Developed test automation frameworks and executed performance engineering for enterprise software systems.",
+      "bullets": [
+        "Automated Regression Testing: Automated repetitive regression testing by implementing Selenium WebDriver (Python) and Playwright automation frameworks, cutting manual testing effort by 40%.",
+        "Response Boundary Benchmarking: Benchmarked system response boundaries using Apache JMeter, identifying database connection pool exhaustion and memory leaks under simulated load conditions.",
+        "Agile Collaboration: Integrated automated testing suites into team sprint cadences, participating in Agile ceremonies and executing rapid post-fix verification."
+      ]
+    },
+    {
+      "role": "Quality Assurance Engineer / Project Lead",
+      "company": "Kirirom Institute of Technology",
+      "location": "Kampong Speu, Cambodia",
+      "period": "02/2022 – 10/2022",
+      "summary": "Led QA operations for computer vision systems and client SDK initiatives, reporting directly to executive leadership.",
+      "bullets": [
+        "Computer Vision Platforms: Led QA verification for mission-critical computer vision platforms, including Face Recognition Attendance Systems, License Plate Recognition (LPR) platforms, and client-facing Mobile SDKs.",
+        "Automated CI/CD Gates: Built automated CI/CD quality gates using GitLab CI/CD, Jenkins, and Google Cloud Platform (GCP), preventing broken builds from progressing to staging.",
+        "Executive Milestone Reporting: Reported weekly milestone velocity directly to the CTO, translating technical defect metrics into clear risk assessments and release decisions."
+      ]
+    },
+    {
+      "role": "Learning Management System (LMS) Operator",
+      "company": "Kirirom Institute of Technology",
+      "location": "Kampong Speu, Cambodia",
+      "period": "02/2022 – 05/2022",
+      "summary": "Maintained digital infrastructure and operational readiness for university academic programs.",
+      "bullets": [
+        "Administered platform workflows, user access controls, and lesson delivery pipelines for faculty and students, ensuring 99.9% LMS availability during exam periods."
+      ]
+    }
+  ]
+}
